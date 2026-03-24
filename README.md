@@ -53,7 +53,9 @@ Please note: The standard AWS ReadOnlyAccess managed policy covers all of these 
 
 ## Run the script
 
-Bash Install the dependencies
+Install the dependencies
+
+Bash 
 pip install -r requirements.txt
 
 Bash
