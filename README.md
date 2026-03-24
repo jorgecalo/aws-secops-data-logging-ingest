@@ -52,16 +52,13 @@ In the Member Accounts (attached to the OrganizationAccountAccessRole):
 Please note: The standard AWS ReadOnlyAccess managed policy covers all of these member account requirements).
 
 ## Run the script
+
+Bash Install the dependencies
+pip install -r requirements.txt
+
 Bash
 /bin/python /path/to/aws_secops_ingestion.py
 
 When the script has run successfully, you will get an overview of the amount of scanned and skipped accounts, a categorized breakdown of the 24 log types, and the total monthly data ingestion for AWS logs within your organization. Account scanning might be limited due to disabled AWS regions or missing cross-account IAM permissions. 
 
 Send the output of the script to your Sales or Customer Engineer.
-
----
-
-## Required Packages
-
-```bash
-pip install boto3
