@@ -32,6 +32,29 @@ This Python script will scan accounts within your AWS Organization and calculate
 *   AWS VPN logs
 *   AWS WAF logs
 
+## Required Cross-Account Setup
+Because AWS separates infrastructure by Account, this script must be run from your Management Account (or a Delegated Administrator account).
+
+The script uses AWS STS to automatically assume the standard OrganizationAccountAccessRole in each underlying member account to gather metrics. If your organization uses a custom name for its cross-account administration role, please update the CROSS_ACCOUNT_ROLE_NAME variable at the top of the Python script.
+
+## Required Permissions
+In the Management Account (the credentials running the script):
+
+* organizations:ListAccounts
+* sts:AssumeRole
+
+In the Member Accounts (attached to the OrganizationAccountAccessRole):
+* logs:DescribeLogGroups
+* logs:DescribeSubscriptionFilters
+* cloudwatch:GetMetricStatistics
+* ec2:DescribeRegions
+
+Please note: The standard AWS ReadOnlyAccess managed policy covers all of these member account requirements).
+
+## Run the script
+Bash
+/bin/python /path/to/aws_secops_ingestion.py
+
 When the script has run successfully, you will get an overview of the amount of scanned and skipped accounts, a categorized breakdown of the 24 log types, and the total monthly data ingestion for AWS logs within your organization. Account scanning might be limited due to disabled AWS regions or missing cross-account IAM permissions. 
 
 Send the output of the script to your Sales or Customer Engineer.
